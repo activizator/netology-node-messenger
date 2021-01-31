@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+        <link rel="stylesheet" href="./css/style.css">
+        <meta name="theme-color" content="#34b3b0">
+    </head>
+    <body>
+        
+        <div id="app" class="columns">
+            <div class="column is-4 is-offset-4">
+                <div id="err-mess" ref="errMess"></div>
+                
+                <template v-if="!me">                
+                    <div id="app-header" class="has-background-link has-text-light p-2 is-size-3 has-text-centered">ActMess</div>
+                    <div id="app-form" class="has-background-link has-text-light p-2">
+                        <div class="columns">
+                            <span class="column is-8">                                
+                                <input type="text" id="user-name" class="input" placeholder="Your name..." ref="myName">
+                            </span>
+                            <span class="column"><button type="submit" id="login-button" class="button is-primary" @click="setUser">Login</button></span>
+                        </div>           
+                    </div>
+                </template>
+
+                <template v-else>
+                    <div id="app-header" class="has-background-link has-text-light p-2 is-size-3 has-text-centered">ActMess
+                        <button id="app-exit-button" class="button is-danger" @click="exitApp">Exit</button> 
+                    </div>
+                    <div id="app-body" class="has-background-light has-text-dark p-2">
+                        <ul id="messages" v-cloak>
+
+                            <li class="message" v-for="item in messages">
+                                <p v-bind:class="{right : item.user === me}">
+                                    <span>{{ item.user }}:</span>&nbsp;
+                                    {{ item.message }}
+                                </p>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div id="app-form" class="has-background-link has-text-light p-2">
+                        <div class="columns is-1">
+                            <span class="column is-8">
+                                <input type="text" id="app-message" class="input" placeholder="message..." ref="myLastMsg">
+                            </span>
+                            <span class="column"></span>
+                            <span class="column">
+                                <button type="submit" id="app-send-button" class="button is-primary" @click="sendMessage">Send</button>
+                            </span>   
+                        </div>           
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.min.js"></script>
+        <script src="./script/script.js"></script>
+    </body>
+</html>

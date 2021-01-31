@@ -1,0 +1,11 @@
+version: "3.3"
+
+services:
+  actmess:
+    build: back/
+    command: node ./index.js
+    ports:
+      - 3000:3000
+    network_mode: host
+    env_file:
+      - .env
